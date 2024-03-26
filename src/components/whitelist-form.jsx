@@ -21,12 +21,12 @@ const WhiteListForm = () => {
           </div>
           <input
             type="text"
-            className="h-[50px] rounded-sm border-slate border bg-transparent w-full"
+            className="h-[50px] rounded-full border-slate border bg-transparent w-full"
             name="account"
           />
         </div>
 
-        <button className="border h-[50px] transition-all duration-200 ease-in-out rounded-sm border-primary/70 hover:border-primary w-full text-primary/70 hover:text-primary">
+        <button className="border h-[50px] transition-all duration-200 ease-in-out rounded-full border-primary/70 hover:border-primary w-full text-primary/70 hover:text-primary">
           Whitelist Account
         </button>
       </aside>
