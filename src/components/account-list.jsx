@@ -1,8 +1,10 @@
 import { Wallet } from 'lucide-react';
 import { dummyData } from '../utils/dummyData';
 import AccountItem from './account-item';
+import { useWhiteListsContext } from '../context';
 
 const AccountList = () => {
+  const context = useWhiteListsContext();
   return (
     <div className="w-full px-12">
       <aside className="flex items-center justify-between">
@@ -10,7 +12,11 @@ const AccountList = () => {
           Whitelisted Accounts <Wallet className="text-primary ml-4" />
         </h2>
         <div>
-          <button className="px-8 h-[50px] font-bold transition-all duration-200 ease-in-out bg-primary rounded-full bg-primary/70 hover:bg-primary w-full text-dark/70 hover:text-dark">
+          <button
+            type="button"
+            className="px-8 h-[50px] font-bold transition-all duration-200 ease-in-out bg-primary rounded-full bg-primary/70 hover:bg-primary w-full text-dark/70 hover:text-dark"
+            onClick={() => context.setAccountStatusModal(true)}
+          >
             Check Account Status
           </button>
         </div>

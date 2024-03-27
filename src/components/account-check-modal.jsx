@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import Modal from './modal';
 import { useWhiteListsContext } from '../context';
 import { validationSchema } from './whitelist-form';
 import { useFormik } from 'formik';
 
 const AccountCheckModal = () => {
-  const [modalOpen, setModalOpen] = useState(true);
+  // const [modalOpen, setModalOpen] = useState(true);
 
   const context = useWhiteListsContext();
   const { handleChange, handleSubmit, errors, values, touched } = useFormik({
@@ -19,7 +18,10 @@ const AccountCheckModal = () => {
     },
   });
   return (
-    <Modal closeModal={() => setModalOpen(false)} isOpen={modalOpen}>
+    <Modal
+      closeModal={() => context?.setAccountStatusModal(false)}
+      isOpen={context?.accountStatusModal}
+    >
       <div className="px-12 py-4">
         <aside>
           <h2 className="text-3xl text-slate-100 font-bold mb-6">
@@ -60,7 +62,7 @@ const AccountCheckModal = () => {
               type="submit"
               className="border h-[50px] transition-all duration-200 ease-in-out rounded-full border-primary/70 hover:border-primary w-full text-primary/70 hover:text-primary disabled:bg-primary/10 disabled:cursor-not-allowed"
             >
-              {context?.whiteListing ? 'Loading...' : ' Whitelist Account'}
+              {context?.whiteListing ? 'Loading...' : ' Check Status'}
             </button>
           </form>
         </aside>
