@@ -22,7 +22,7 @@ const getEthereumContract = () => {
 };
 
 export const WhiteListProvider = ({ children }) => {
-  const [currentAccount, setCurrentAccount] = useState('');
+  const [currentAccount, setCurrentAccount] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const walletConnect = useWalletConnect();
@@ -64,6 +64,7 @@ export const WhiteListProvider = ({ children }) => {
   const connectToWallet = async () => {
     console.log('Clicked');
     const accounts = await walletConnect.connectToMetamask();
+    setCurrentAccount(accounts[0]);
     console.log('Clicked');
     console.log(accounts);
   };

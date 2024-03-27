@@ -5,9 +5,9 @@ import WhiteListForm from './whitelist-form';
 
 const Home = () => {
   const context = useWhiteListsContext();
-  console.log(context?.isWalletConnected);
+  console.log(context?.currentAccount);
 
-  if (!context?.isWalletConnected) {
+  if (!context?.currentAccount) {
     return <DefaultScreen />;
   }
   return (

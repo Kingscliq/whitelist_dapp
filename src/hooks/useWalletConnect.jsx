@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers';
 import { networksConfig } from '../utils/networkConfig';
 import { toast } from 'react-toastify';
 
@@ -36,23 +36,26 @@ export const useWalletConnect = () => {
     }
   };
 
-  const getProvider = () => {
-    if (!ethereum) {
-      throw new Error('Metamask is not installed! Go install the extension!');
-    }
+  //   const getProvider = () => {
+  //     if (!ethereum) {
+  //       throw new Error('Metamask is not installed! Go install the extension!');
+  //     }
 
-    return new ethers.providers.Web3Provider(ethereum);
-  };
+  //     return new ethers.providers.Web3Provider(ethereum);
+  //   };
 
   const connectToMetamask = async () => {
-    const provider = getProvider();
+    // const provider = getProvider();
 
     // keep track of accounts returned
     let accounts = [];
 
     try {
       await switchToHederaNetwork(ethereum);
-      accounts = await provider.send('eth_requestAccounts', []);
+      //   accounts = await provider.send('eth_requestAccounts', []);
+      accounts = await ethereum.request({
+        method: 'eth_requestAccounts',
+      });
     } catch (error) {
       if (error.code === 4001) {
         console.log(error);
