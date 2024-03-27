@@ -1,4 +1,5 @@
 // import { ethers } from 'ethers';
+import { ethers } from 'ethers';
 import { networksConfig } from '../utils/networkConfig';
 import { toast } from 'react-toastify';
 
@@ -12,19 +13,33 @@ export const useWalletConnect = () => {
       });
     } catch (error) {
       if (error.code === 4902) {
+        const params = [
+          {
+            chainName: networksConfig.hederaTestnet.name,
+            chainId: `0x${networksConfig.hederaTestnet.chainId}`,
+            nativeCurrency: {
+              name: 'HBAR',
+              symbol: 'HBAR',
+              decimals: 18,
+            },
+            rpcUrls: [networksConfig.hederaTestnet.rpc],
+          },
+        ];
+
+        console.log({ params });
         try {
           await ethereum.request({
             method: 'wallet_addEthereumChain',
             params: [
               {
-                chainName: `Hedera (${networksConfig.hederaTestnet.chainName})`,
-                chainId: networksConfig.hederaTestnet.chainId,
+                chainName: networksConfig.hederaTestnet.name,
+                chainId: `0x${networksConfig.hederaTestnet.chainId}`,
                 nativeCurrency: {
                   name: 'HBAR',
                   symbol: 'HBAR',
                   decimals: 18,
                 },
-                rpcUrls: [networksConfig.hederaTestnet.jsonRpcUrl],
+                rpcUrls: [networksConfig.hederaTestnet.rpc],
               },
             ],
           });
@@ -36,29 +51,25 @@ export const useWalletConnect = () => {
     }
   };
 
-  //   const getProvider = () => {
-  //     if (!ethereum) {
-  //       throw new Error('Metamask is not installed! Go install the extension!');
-  //     }
+  const getProvider = () => {
+    if (!ethereum) {
+      throw new Error('Metamask is not installed! Go install the extension!');
+    }
 
-  //     return new ethers.providers.Web3Provider(ethereum);
-  //   };
+    return new ethers.BrowserProvider(ethereum);
+  };
 
   const connectToMetamask = async () => {
-    // const provider = getProvider();
+    const provider = getProvider();
 
     // keep track of accounts returned
     let accounts = [];
 
     try {
       await switchToHederaNetwork(ethereum);
-      //   accounts = await provider.send('eth_requestAccounts', []);
-      accounts = await ethereum.request({
-        method: 'eth_requestAccounts',
-      });
+      accounts = await provider.send('eth_requestAccounts', []);
     } catch (error) {
       if (error.code === 4001) {
-        console.log(error);
         toast.warn('Please connect to Metamask.');
       } else {
         console.error(error);

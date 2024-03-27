@@ -18,7 +18,7 @@ const DefaultScreen = () => {
           className=" h-[50px] font-bold transition-all duration-200 ease-in-out bg-primary rounded-full bg-primary/70 hover:bg-primary w-full text-dark/70 hover:text-dark"
           onClick={() => context?.connectToWallet()}
         >
-          Whitelist Account
+          Connect Wallet
         </button>
       </aside>
     </section>
