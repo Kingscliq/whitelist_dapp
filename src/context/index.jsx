@@ -1,8 +1,9 @@
-import { createContext, useState } from 'react';
-import { contractABI, contractAddress } from '../../utils/constants';
+import React, { createContext, useState } from 'react';
 
 import { ethers } from 'ethers';
 import { toast } from 'react-toastify';
+import { contractAbi, contractAddress } from '../utils/constants';
+import { useWalletConnect } from '../hooks/useWalletConnect';
 
 export const WhiteListContext = createContext(null);
 
@@ -14,7 +15,7 @@ const getEthereumContract = () => {
   const signer = provider.getSigner();
   const transactionContract = new ethers.Contract(
     contractAddress,
-    contractABI,
+    contractAbi,
     signer
   );
   return transactionContract;
@@ -23,15 +24,16 @@ const getEthereumContract = () => {
 export const WhiteListProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState('');
   const [loading, setLoading] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+
+  const walletConnect = useWalletConnect();
 
   // Check if Wallet is Connected
   const isWalletConnected = async () => {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     // fetchAllTransactions();
     if (accounts.length > 0) {
-      setCurrentAccount(accounts[0]);
-    } else return;
+      return true;
+    } else return false;
   };
 
   // Check if transactions Exist
@@ -52,7 +54,7 @@ export const WhiteListProvider = ({ children }) => {
       //     };
       //   });
 
-      //   setTransactions(formattedTransactions);
+      //   setTransactions(formattedTransactions)
     } catch (error) {
       console.log(error);
     }
@@ -60,19 +62,15 @@ export const WhiteListProvider = ({ children }) => {
 
   // Connect to Wallet
   const connectToWallet = async () => {
-    try {
-      if (!ethereum) return toast('Please connect to a Metamask');
-      const accounts = await ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      setCurrentAccount(accounts[0]);
-    } catch (error) {
-      toast.error('No account found');
-    }
+    console.log('Clicked');
+    const accounts = await walletConnect.connectToMetamask();
+    console.log('Clicked');
+    console.log(accounts);
   };
 
   // Send Transaction
   const whiteListAccount = async data => {
+    console.log(data);
     setLoading(true);
     if (!ethereum) {
       return toast('Please connect to a Metamask');
@@ -116,10 +114,22 @@ export const WhiteListProvider = ({ children }) => {
         connectToWallet,
         currentAccount,
         loading,
-        transactions,
+        isWalletConnected,
+        verifyWhiteListedAccounts,
+        whiteListAccount,
       }}
     >
       {children}
     </WhiteListContext.Provider>
   );
+};
+
+export const useWhiteListsContext = () => {
+  const context = React.useContext(WhiteListContext);
+
+  if (context === undefined) {
+    throw new Error('WhiteListContext must be used within a WhiteListProvider');
+  }
+
+  return context;
 };

@@ -55,6 +55,7 @@ export const useWalletConnect = () => {
       accounts = await provider.send('eth_requestAccounts', []);
     } catch (error) {
       if (error.code === 4001) {
+        console.log(error);
         toast.warn('Please connect to Metamask.');
       } else {
         console.error(error);
@@ -64,5 +65,5 @@ export const useWalletConnect = () => {
     return accounts;
   };
 
-  return { switchToHederaNetwork };
+  return { connectToMetamask };
 };
