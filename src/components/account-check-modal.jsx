@@ -22,9 +22,9 @@ const AccountCheckModal = () => {
       closeModal={() => context?.setAccountStatusModal(false)}
       isOpen={context?.accountStatusModal}
     >
-      <div className="px-12 py-4">
+      <div className=" px-4 lg:px-12 py-4">
         <aside>
-          <h2 className="text-3xl text-slate-100 font-bold mb-6">
+          <h2 className="text-3xl text-slate-100 font-bold mb-2">
             Check Account Status
           </h2>
           <p className="text-slate">
@@ -60,7 +60,7 @@ const AccountCheckModal = () => {
             <button
               disabled={context?.whitelisting}
               type="submit"
-              className="border h-[50px] transition-all duration-200 ease-in-out rounded-full border-primary/70 hover:border-primary w-full text-primary/70 hover:text-primary disabled:bg-primary/10 disabled:cursor-not-allowed"
+              className="px-8 h-[50px] font-bold transition-all duration-200 ease-in-out bg-primary rounded-full bg-primary/70 hover:bg-primary w-full text-dark/70 hover:text-dark"
             >
               {context?.whiteListing ? 'Loading...' : ' Check Status'}
             </button>

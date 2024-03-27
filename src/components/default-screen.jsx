@@ -3,7 +3,7 @@ import { useWhiteListsContext } from '../context';
 const DefaultScreen = () => {
   const context = useWhiteListsContext();
   return (
-    <section className=" h-screen flex items-center justify-center">
+    <section className="px-4 h-screen flex items-center justify-center">
       <aside className="w-[500px]">
         <h2 className="text-3xl text-slate-100 font-bold mb-6 text-center">
           😎 Hi! Welcome to Whiteman

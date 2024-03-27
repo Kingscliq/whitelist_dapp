@@ -26,7 +26,7 @@ export const WhiteListProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState(null);
   const [whiteListing, setWhiteListing] = useState(false);
   const [verifyingAccount, setVerifyingAccount] = useState(false);
-  const [accountStatusModal, setAccountStatusModal] = useState(true);
+  const [accountStatusModal, setAccountStatusModal] = useState(false);
 
   const walletConnect = useWalletConnect();
 

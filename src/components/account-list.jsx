@@ -6,9 +6,9 @@ import { useWhiteListsContext } from '../context';
 const AccountList = () => {
   const context = useWhiteListsContext();
   return (
-    <div className="w-full px-12">
-      <aside className="flex items-center justify-between">
-        <h2 className="text-3xl text-slate-100 font-bold mb-6 flex items-center">
+    <div className="w-full lg:px-12 px-4 mt-24 lg:mt-0">
+      <aside className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
+        <h2 className="text-xl lg:text-3xl text-slate-100 font-bold mb-6 flex items-center">
           Whitelisted Accounts <Wallet className="text-primary ml-4" />
         </h2>
         <div>

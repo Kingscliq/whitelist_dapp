@@ -19,7 +19,7 @@ const WhiteListForm = () => {
     },
   });
   return (
-    <div className="px-12 py-4">
+    <div className="lg:px-12 px-4 py-4">
       <aside>
         <h2 className="text-3xl text-slate-100 font-bold mb-6">
           😎 Hey {shorten(context?.currentAccount)}

@@ -3,7 +3,7 @@ import { CircleX } from 'lucide-react';
 const Modal = ({ children, isOpen, closeModal }) => {
   return (
     <section
-      className={`h-full w-screen z-50 bg-black  text-slate-100 items-center justify-center bg-opacity-80 fixed top-0 left-0 duration-500 transition-all ${
+      className={`h-full w-screen z-50 bg-black  text-slate-100 items-center justify-center bg-opacity-80 fixed top-0 left-0 duration-1000 transition-all ${
         isOpen ? 'opacity-100 flex' : 'opacity-0 hidden'
       }  `}
     >
